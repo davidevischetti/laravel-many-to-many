@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Models\Tag;
 use App\Models\Post;
 use App\Models\Category;
 use Illuminate\Http\Request;
@@ -29,8 +30,11 @@ class PostController extends Controller
     public function create()
     {
         $categories = Category::all();
+        $tags = Tag::all();
+
         return view('admin.posts.create', [
-            'categories' => $categories
+            'categories' => $categories,
+            'tags' => $tags,
         ]);
     }
 
@@ -45,9 +49,9 @@ class PostController extends Controller
         $request->validate([
             'title' => 'required|string|max:100',
             'slug' => 'required|string|max:100|unique:posts',
-            'category_id' => 'required|exists:categories, id',
+            'category_id' => 'required|exists:categories,id',
             'tags' => 'nullable|array',
-            'tags.*' =>'exist:tags, id',
+            'tags.*' =>'exists:tags,id',
             'image' =>'required_without:content|nullable|url',
             'content' =>'required_without:image|nullable|string|max:5000',
             'excerpt' => 'nullable|string|max:200'
@@ -58,7 +62,7 @@ class PostController extends Controller
 
         Post::create($formData); // con protected $fillable nel model
 
-        return redirect()->route('posts.index');
+        return redirect()->route('admin.posts.index');
     }
 
     /**
