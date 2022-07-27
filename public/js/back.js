@@ -27804,6 +27804,22 @@ module.exports = function(module) {
 
 __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
+var deleteButton = document.querySelectorAll('.js-delete');
+var eleOverlay = document.querySelector('.overlay');
+
+if (eleOverlay) {
+  deleteButton.forEach(function (button) {
+    button.addEventListener('click', function () {
+      eleOverlay.classList.remove('d-none');
+    });
+  });
+  document.querySelector('.js-no').addEventListener('click', function () {
+    eleOverlay.classList.add('d-none');
+  });
+}
+
+;
+
 /***/ }),
 
 /***/ "./resources/js/bootstrap.js":

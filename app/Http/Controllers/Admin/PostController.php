@@ -34,7 +34,7 @@ class PostController extends Controller
 
         return view('admin.posts.create', [
             'categories' => $categories,
-            'tags' => $tags,
+            'tags' => $tags
         ]);
     }
 
@@ -51,7 +51,7 @@ class PostController extends Controller
             'slug' => 'required|string|max:100|unique:posts',
             'category_id' => 'required|exists:categories,id',
             'tags' => 'nullable|array',
-            'tags.*' =>'exists:tags,id',
+            'tags.*' =>'integer|exists:tags,id',
             'image' =>'required_without:content|nullable|url',
             'content' =>'required_without:image|nullable|string|max:5000',
             'excerpt' => 'nullable|string|max:200'
@@ -71,9 +71,9 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Post $post)
     {
-        //
+        return view('admin.posts.show', compact('post'));
     }
 
     /**
@@ -82,9 +82,9 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Post $post)
     {
-        //
+        return view('admin.posts.edit', compact('post'));
     }
 
     /**
@@ -94,9 +94,13 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Post $post)
     {
-        //
+        $formData = $request->all();
+
+        $post->update($formData);// con protected $fillable nel model
+
+        return redirect()->route('posts.show', ['post' => $post]);
     }
 
     /**
@@ -105,8 +109,10 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Post $post)
     {
-        //
+        $post->delete();
+
+        return redirect()->route('admin.posts.index');
     }
 }

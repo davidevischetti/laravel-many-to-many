@@ -10,22 +10,16 @@
         <thead class="table-primary">
         <tr>
             <th scope="col">ID</th>
-            <th scope="col">Slug</th>
             <th scope="col">Title</th>
-            <th scope="col">Category</th>
+            <th scope="col">Slug</th>
         </tr>
         </thead>
         <tbody>
             @foreach ($posts as $post)
             <tr>
                 <td>{{$post->id}}</td>
+                <td><a href="{{route('admin.posts.show', ['post' => $post['id']])}}">{{$post->title}}</a></td>
                 <td>{{$post->slug}}</td>
-                <td>{{$post->title}}</td>
-                {{-- @php
-                $postCategory = $post->category()->first()
-            @endphp
-
-            <td>{{$postCategory ? ($postCategory->name ?: '__________') : '__________'}}</td> --}}
             </tr>
             @endforeach
         </tbody>

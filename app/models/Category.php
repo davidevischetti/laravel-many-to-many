@@ -15,6 +15,6 @@ class Category extends Model
     public $timestamps = false;
 
     public function post() {
-        return $this->hasMany('App/Models/Post');
+        return $this->hasMany('App\Models\Post');
     }
 }
