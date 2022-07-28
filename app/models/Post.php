@@ -20,7 +20,11 @@ class Post extends Model
         return $this->belongsToMany('App\Models\Tag');
     }
 
-    public function users() {
-        return $this->belongsTo('App\Models\Post');
+    public function user() {
+        return $this->belongsTo('App\Models\User');
+    }
+
+    public function getRouteKeyName() {
+        return 'slug';
     }
 }

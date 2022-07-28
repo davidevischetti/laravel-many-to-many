@@ -7,9 +7,10 @@
     @include('admin/partials/side-nav')
 
     <div class="container">
-        <img src="{{$post->image}}" alt="">
         <h1>{{$post->title}}</h1>
+        <img src="{{$post->image}}" alt="">
         <p class="content">{{$post->content}}</p>
+        <h3>Author:{{$post->user->name}}</h3>
         <div>Category:{{$post->category->name}}</div>
         <span>Tags:</span>
         @foreach($post->tags as $tag)

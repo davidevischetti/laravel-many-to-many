@@ -11,15 +11,17 @@
         <tr>
             <th scope="col">ID</th>
             <th scope="col">Title</th>
-            <th scope="col">Slug</th>
+            <th scope="col">Author</th>
+            <th scope="col">Category</th>
         </tr>
         </thead>
         <tbody>
             @foreach ($posts as $post)
             <tr>
                 <td>{{$post->id}}</td>
-                <td><a href="{{route('admin.posts.show', ['post' => $post['id']])}}">{{$post->title}}</a></td>
-                <td>{{$post->slug}}</td>
+                <td><a href="{{route('admin.posts.show', ['post' => $post])}}">{{$post->title}}</a></td>
+                <td>{{$post->user->name}}</td>
+                <td>{{$post->category->name}}</td>
             </tr>
             @endforeach
         </tbody>
