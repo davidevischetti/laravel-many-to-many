@@ -9,33 +9,32 @@
     <div class="container">
         <img src="{{$post->image}}" alt="">
         <h1>{{$post->title}}</h1>
-        <p>{{$post->content}}</p>
+        <p class="content">{{$post->content}}</p>
         <div>Category:{{$post->category->name}}</div>
         <span>Tags:</span>
         @foreach($post->tags as $tag)
             <span>{{ $tag->name }}</span>
             @if(!$loop->last) , @endif
         @endforeach
+
+        <div id="buttons">
+            <button class="btn btn-success mt-3"><a href="{{route('admin.posts.edit', ['post' => $post])}}">Edit</a></button>
+            <button class="btn btn-danger js-delete mt-3"><a>Delete</a></button>
+        </div>
     </div>
-
-    <div id="buttons">
-        <button class="btn btn-success mb-3"><a href="{{route('admin.posts.edit', ['post' => $post])}}">Edit</a></button>
-        <button class="btn btn-danger js-delete"><a>Delete</a></button>
-    </div>
-
-    <section class="overlay d-none">
-
-            <form class="popup" action="{{route('admin.posts.destroy', ['post'=> $post])}}" method="post">
-            @csrf
-            @method('delete')
-            <h4>Vuoi eliminare questo elemento?</h4>
-            <button type="submit" class="btn btn-success js-yes">SI</button>
-            <button type="button" class="btn btn-danger js-no">NO</button>
-            </form>
-
-    </section>
 
 </div>
 
+<section class="overlay d-none">
+
+    <form class="popup" action="{{route('admin.posts.destroy', ['post'=> $post])}}" method="post">
+    @csrf
+    @method('delete')
+    <h4>Vuoi eliminare questo elemento?</h4>
+    <button type="submit" class="btn btn-success js-yes">SI</button>
+    <button type="button" class="btn btn-danger js-no">NO</button>
+    </form>
+
+</section>
 
 @endsection

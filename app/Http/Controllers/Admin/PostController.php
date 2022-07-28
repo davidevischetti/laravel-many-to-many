@@ -60,7 +60,8 @@ class PostController extends Controller
         // dump($request->all());
         $formData = $request->all();
 
-        Post::create($formData); // con protected $fillable nel model
+        $post = Post::create($formData); // con protected $fillable nel model
+        $post->tags()->sync($formData['tags']);
 
         return redirect()->route('admin.posts.index');
     }
@@ -111,6 +112,7 @@ class PostController extends Controller
      */
     public function destroy(Post $post)
     {
+        $post->tags()->detach();
         $post->delete();
 
         return redirect()->route('admin.posts.index');
