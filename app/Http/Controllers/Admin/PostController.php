@@ -7,6 +7,7 @@ use App\Models\Post;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 
 class PostController extends Controller
 {
@@ -58,7 +59,9 @@ class PostController extends Controller
         ]);
 
         // dump($request->all());
-        $formData = $request->all();
+        $formData = $request->all() + [
+            'user_id' => Auth::id()
+        ];
 
         $post = Post::create($formData); // con protected $fillable nel model
         $post->tags()->sync($formData['tags']);

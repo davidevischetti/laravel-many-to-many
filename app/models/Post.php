@@ -9,7 +9,7 @@ class Post extends Model
 {
     use Slugger;
     protected $fillable = [
-        'title', 'content', 'excerpt', 'category_id', 'image', 'slug'
+        'title', 'content', 'excerpt', 'category_id', 'image', 'slug', 'user_id'
     ];
 
     public function category() {
@@ -18,5 +18,9 @@ class Post extends Model
 
     public function tags() {
         return $this->belongsToMany('App\Models\Tag');
+    }
+
+    public function users() {
+        return $this->belongsTo('App\Models\Post');
     }
 }

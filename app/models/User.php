@@ -41,4 +41,8 @@ class User extends Authenticatable
         return $this->hasOne('App\Models\UserDetails'); //NELLA TABELLA CHE NON HA IL FOREIGN KEY
         //return $this->belongsTo('App\Models\User'); //NELLA TABELLA CON IL FOREIGN KEY
     }
+
+    public function posts() {
+        return $this->hasMany('App\Models\Post');
+    }
 }
