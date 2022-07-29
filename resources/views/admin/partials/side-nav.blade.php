@@ -6,6 +6,9 @@
       <a class="nav-link" href="{{route('admin.posts.index')}}">Posts</a>
     </li>
     <li class="nav-item">
+      <a class="nav-link" href="{{route('admin.posts.myIndex')}}">My Posts</a>
+    </li>
+    <li class="nav-item">
       <a class="nav-link" href="{{route('admin.posts.create')}}">Add Post</a>
     </li>
     <li class="nav-item">

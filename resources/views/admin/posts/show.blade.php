@@ -18,10 +18,12 @@
             @if(!$loop->last) , @endif
         @endforeach
 
-        <div id="buttons">
-            <button class="btn btn-success mt-3"><a href="{{route('admin.posts.edit', ['post' => $post])}}">Edit</a></button>
-            <button class="btn btn-danger js-delete mt-3"><a>Delete</a></button>
-        </div>
+        @if(Auth::id() == $post->user_id)
+            <div id="buttons">
+                <button class="btn btn-success mt-3"><a href="{{route('admin.posts.edit', ['post' => $post])}}">Edit</a></button>
+                <button class="btn btn-danger js-delete mt-3"><a>Delete</a></button>
+            </div>
+        @endif
     </div>
 
 </div>

@@ -55,11 +55,11 @@
         </div>
 
         <div class="mb-3">
-            <label class="form-label" for="category_id">tag</label>
+            <label class="form-label" for="category_id">category</label>
             <select name="category_id" id="category_id">
                 <option disabled value="">Select the post category...</option>
                 @foreach ($categories as $category)
-                    <option value="{{$category->id}}">{{$category->name}}</option>
+                    <option value="{{$category->id}}" @if($category->id == old('category_id')) selected @endif >{{$category->name}}</option>
                 @endforeach
             </select>
             @error('category_id')
@@ -73,7 +73,8 @@
             <legend>tags</legend>
             @foreach ($tags as $tag)
                 <div class="form-check">
-                    <input type="checkbox" class="form-check-input" name="tags[]" value="{{$tag->id}}" id="tag-{{$tag->id}}">
+                    <input type="checkbox" class="form-check-input" name="tags[]" value="{{$tag->id}}" id="tag-{{$tag->id}}"
+                        @if(in_array($tag->id, old('tags') ?: [])) checked @endif>
                     <label for="tag-{{$tag->id}}" class="fomr-check-label">{{$tag->name}}</label>
                 </div>
             @endforeach
